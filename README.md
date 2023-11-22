@@ -9,8 +9,9 @@ This is based on the example provided by Prosemirror on their website. See more 
 npm install tiptap-extension-footnote
 ```
 ## Usage
+This example uses vue3 but this should work with whatever framework you are using. Make sure to add the **css**, this is how the extension manages footnotes display and numbering.
 
-```
+```vue
 <template>
   <button @click="editor.chain().focus().insertContent({ type: 'footnote' }).run()">
     insert footnote
