@@ -1,6 +1,5 @@
 // rollup.config.js
 
-const autoExternal = require("rollup-plugin-auto-external");
 const sourcemaps = require("rollup-plugin-sourcemaps");
 const commonjs = require("@rollup/plugin-commonjs");
 const babel = require("@rollup/plugin-babel");
@@ -21,8 +20,8 @@ const config = {
       sourcemap: true,
     },
   ],
+  external: ["@tiptap/core", "@tiptap/pm/history","@tiptap/pm/transform","@tiptap/pm/state","@tiptap/pm/history","@tiptap/pm/keymap","@tiptap/pm/view"],
   plugins: [
-    autoExternal({ packagePath: "./package.json" }),
     sourcemaps(),
     babel(),
     commonjs(),
