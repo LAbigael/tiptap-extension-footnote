@@ -1,11 +1,21 @@
-import { Extension } from '@tiptap/core'
+import { Node } from '@tiptap/core'
+import { FootnoteView } from './nodeView'
 
-const MyExtension = Extension.create({
-  name: "MyExtension",
-
-  // do your stuff here
+const footnoteNode = Node.create({
+  name: 'footnote',
+  group: 'inline',
+  content: 'inline*',
+  inline: true,
+  atom: true,
+  renderHTML: function () {
+    return ['footnote', 0]
+  },
+  parseHTML: [{ tag: 'footnote' }],
+  addNodeView() {
+    return ({ editor, node, getPos }) => {
+      return new FootnoteView({ view: editor.view, node, getPos })
+    }
+  }
 })
 
-export { MyExtension }
-
-export default MyExtension
+export default footnoteNode
