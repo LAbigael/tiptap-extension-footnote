@@ -1,4 +1,4 @@
-# TiptapExtensionFootnote
+# Tiptap extension footnote
 
 A tiptap extension to add footnotes to you editor.
 This is based on the example provided by Prosemirror on their website. See more : https://prosemirror.net/examples/footnote/
