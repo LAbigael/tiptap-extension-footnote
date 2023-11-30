@@ -5,7 +5,9 @@ import { StepMap } from '@tiptap/pm/transform'
 import { EditorView } from '@tiptap/pm/view'
 
 export const FootnoteView = function ({ node, view, getPos }) {
-  const dom = document.createElement('footnote')
+  const dom = document.createElement('span')
+  dom.classList.add('footnote');
+
   let innerView
   const open = function () {
     const tooltip = dom.appendChild(document.createElement('div'))

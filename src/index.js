@@ -1,21 +1,29 @@
-import { Node } from '@tiptap/core'
-import { FootnoteView } from './nodeView'
+import { Node } from "@tiptap/core";
+import { FootnoteView } from "./nodeView";
 
 const footnoteNode = Node.create({
-  name: 'footnote',
-  group: 'inline',
-  content: 'inline*',
+  name: "footnote",
+  group: "inline",
+  content: "inline*",
   inline: true,
   atom: true,
   renderHTML: function () {
-    return ['footnote', 0]
+    return ["span", { class: "footnote" }, 0];
   },
-  parseHTML: [{ tag: 'footnote' }],
+  parseHTML: [
+    {
+      tag: "span",
+      getAttrs: function (dom) {
+        // check if element has class "footnote"
+      return  dom.classList.contains("footnote") ? {} : false;
+      },
+    },
+  ],
   addNodeView() {
     return ({ editor, node, getPos }) => {
-      return new FootnoteView({ view: editor.view, node, getPos })
-    }
-  }
-})
+      return new FootnoteView({ view: editor.view, node, getPos });
+    };
+  },
+});
 
-export default footnoteNode
+export default footnoteNode;

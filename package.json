@@ -1,6 +1,6 @@
 {
   "name": "tiptap-extension-footnote",
-  "version": "1.0.1",
+  "version": "0.1.0",
   "description": "A footnote extension for tiptap",
   "files": [
     "dist"
