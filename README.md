@@ -1,3 +1,5 @@
+# THIS EXTENSION IS IN ALPHA, DO NOT USE FOR PRODUCTION
+
 # Tiptap extension footnote
 
 A tiptap extension to add footnotes to you editor.
