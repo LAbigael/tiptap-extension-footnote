@@ -1,4 +1,4 @@
-import { Node } from "@tiptap/core";
+import { Node, mergeAttributes } from "@tiptap/core";
 import { FootnoteView } from "./nodeView";
 
 const footnoteNode = Node.create({
@@ -7,15 +7,38 @@ const footnoteNode = Node.create({
   content: "inline*",
   inline: true,
   atom: true,
-  renderHTML: function () {
-    return ["span", { class: "footnote" }, 0];
+  addAttributes() {
+    return {
+      content: {
+        default: "",
+      },
+      href: {
+        default: "#nowhere",
+      },
+    };
+  },
+  renderHTML: function ({ node, HTMLAttributes }) {
+    let nodeContent = "";
+    if (node.content.content.length > 0) {
+      nodeContent = node.content.content[0].text;
+    }
+    return [
+      "a",
+      mergeAttributes(HTMLAttributes, {
+        class: "footnote",
+        content: nodeContent,
+      }),
+      "",
+    ];
   },
   parseHTML: [
     {
-      tag: "span",
+      tag: "a",
       getAttrs: function (dom) {
         // check if element has class "footnote"
-      return  dom.classList.contains("footnote") ? {} : false;
+        if (dom.getAttribute("content"))
+          dom.innerText = dom.getAttribute("content");
+        return dom.classList.contains("footnote") ? {} : false;
       },
     },
   ],
