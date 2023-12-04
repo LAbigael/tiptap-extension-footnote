@@ -24,5 +24,9 @@
   "Dependencies": {
     "@tiptap/core": "^2.0.0-beta.220",
     "@tiptap/pm": "^2.0.0-beta.220"
+  },
+  "dependencies": {
+    "@tiptap/starter-kit": "^2.1.13",
+    "uid": "^2.0.2"
   }
 }
