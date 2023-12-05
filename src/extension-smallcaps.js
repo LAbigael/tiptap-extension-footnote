@@ -5,15 +5,6 @@ import {
 const SmallCaps = Mark.create({
   name: "smallcaps",
 
-  addOptions() {
-    return {
-      HTMLAttributes: {
-        class: {
-          default: "smallcaps",
-        },
-      },
-    };
-  },
 
   parseHTML() {
     return [
@@ -27,7 +18,9 @@ const SmallCaps = Mark.create({
   renderHTML() {
     return [
       "span",
-      this.options.HTMLAttributes,
+      {
+        class: "smallcaps",
+      },
       0,
     ];
   },
