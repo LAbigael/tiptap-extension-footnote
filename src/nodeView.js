@@ -1,5 +1,7 @@
 import { Editor } from "@tiptap/core";
 import StarterKit from "@tiptap/starter-kit";
+import { StepMap } from "@tiptap/pm/transform";
+import SmallCaps from "./extension-smallcaps";
 
 export const FootnoteView = function({ node, editor: outerEditor, getPos }) {
   const dom = document.createElement("footnote");
@@ -16,9 +18,9 @@ export const FootnoteView = function({ node, editor: outerEditor, getPos }) {
       editor.chain().focus().toggleItalic().run();
     });
     tooltip.appendChild(document.createElement("button"));
-    tooltip.lastChild.textContent = "bold";
+    tooltip.lastChild.textContent = "smallcaps";
     tooltip.lastChild.addEventListener("click", () => {
-      editor.chain().focus().toggleBold().run();
+      editor.chain().focus().toggleSmallcaps().run();
     });
 
     editor = new Editor({
@@ -28,12 +30,16 @@ export const FootnoteView = function({ node, editor: outerEditor, getPos }) {
           gapcursor: false,
           dropcursor: false,
         }),
+        SmallCaps,
       ],
       onCreate: function({ editor }) {
         editor.commands.setContent(node.content.toJSON());
       },
+      onUpdate: function({ editor }) { },
     });
+
     innerView = editor.view;
+    innerView.focus();
   };
   const setContent = (editor) => {
     outerEditor
@@ -45,7 +51,6 @@ export const FootnoteView = function({ node, editor: outerEditor, getPos }) {
           attrs: { ...node.attrs },
           content: editor.getJSON().content,
         });
-        console.log("replaceSelectionWith", newNode);
         tr.replaceSelectionWith(newNode);
         return true;
       })
@@ -58,6 +63,7 @@ export const FootnoteView = function({ node, editor: outerEditor, getPos }) {
     }
     innerView.destroy();
     innerView = null;
+    editor.destroy();
     dom.textContent = "";
   };
   return {
@@ -68,6 +74,8 @@ export const FootnoteView = function({ node, editor: outerEditor, getPos }) {
       }
     },
     deselectNode: function() {
+      dom.classList.remove("ProseMirror-selectednode");
+
       if (!innerView || (innerView && !innerView.hasFocus())) {
         setContent(editor);
         close();
