@@ -1,5 +1,6 @@
 import { Node, mergeAttributes } from "@tiptap/core";
 import { FootnoteView } from "./nodeView";
+import SmallCaps from "./extension-smallcaps";
 import { uid } from "uid";
 
 const footnoteNode = Node.create({
@@ -38,3 +39,5 @@ const footnoteNode = Node.create({
 });
 
 export default footnoteNode;
+
+export { SmallCaps };
