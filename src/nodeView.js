@@ -35,11 +35,9 @@ export const FootnoteView = function({ node, editor: outerEditor, getPos }) {
       onCreate: function({ editor }) {
         editor.commands.setContent(node.content.toJSON());
       },
-      onUpdate: function({ editor }) { },
     });
 
     innerView = editor.view;
-    innerView.focus();
   };
   const setContent = (editor) => {
     outerEditor
@@ -49,7 +47,7 @@ export const FootnoteView = function({ node, editor: outerEditor, getPos }) {
         const newNode = outerEditor.schema.nodeFromJSON({
           type: node.type.name,
           attrs: { ...node.attrs },
-          content: editor.getJSON().content,
+          content: editor.getJSON().content[0].content,
         });
         tr.replaceSelectionWith(newNode);
         return true;
@@ -74,9 +72,8 @@ export const FootnoteView = function({ node, editor: outerEditor, getPos }) {
       }
     },
     deselectNode: function() {
-      dom.classList.remove("ProseMirror-selectednode");
-
       if (!innerView || (innerView && !innerView.hasFocus())) {
+        dom.classList.remove("ProseMirror-selectednode");
         setContent(editor);
         close();
       }
