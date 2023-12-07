@@ -1,15 +1,15 @@
 import { Editor } from "@tiptap/core";
 import StarterKit from "@tiptap/starter-kit";
-import { StepMap } from "@tiptap/pm/transform";
-import SmallCaps from "./extension-smallcaps";
+import FontVariant from "./tiptap-extension-font-variant";
+import TextStyle from "@tiptap/extension-text-style";
 
-export const FootnoteView = function({ node, editor: outerEditor, getPos }) {
+export const FootnoteView = function ({ node, editor: outerEditor, getPos }) {
   const dom = document.createElement("footnote");
 
   let innerView = null;
   let editor = null;
 
-  const open = function() {
+  const open = function () {
     const tooltip = dom.appendChild(document.createElement("div"));
     tooltip.className = "footnote-tooltip";
     tooltip.appendChild(document.createElement("button"));
@@ -20,7 +20,11 @@ export const FootnoteView = function({ node, editor: outerEditor, getPos }) {
     tooltip.appendChild(document.createElement("button"));
     tooltip.lastChild.textContent = "smallcaps";
     tooltip.lastChild.addEventListener("click", () => {
-      editor.chain().focus().toggleSmallcaps().run();
+      // if (editor.isActive("fontVariant", { fontVariant: "small-caps" })) {
+      //   editor.chain().focus().unsetFontVariant().run();
+      // } else {
+        editor.chain().focus().toggleSmallCaps().run();
+      // }
     });
 
     editor = new Editor({
@@ -30,9 +34,10 @@ export const FootnoteView = function({ node, editor: outerEditor, getPos }) {
           gapcursor: false,
           dropcursor: false,
         }),
-        SmallCaps,
+        FontVariant,
+        TextStyle,
       ],
-      onCreate: function({ editor }) {
+      onCreate: function ({ editor }) {
         editor.commands.setContent(node.content.toJSON());
       },
     });
@@ -55,7 +60,7 @@ export const FootnoteView = function({ node, editor: outerEditor, getPos }) {
       .run();
   };
 
-  const close = function() {
+  const close = function () {
     if (!innerView) {
       return;
     }
@@ -65,28 +70,28 @@ export const FootnoteView = function({ node, editor: outerEditor, getPos }) {
     dom.textContent = "";
   };
   return {
-    selectNode: function() {
+    selectNode: function () {
       dom.classList.add("ProseMirror-selectednode");
       if (!innerView) {
         open();
       }
     },
-    deselectNode: function() {
+    deselectNode: function () {
       if (!innerView || (innerView && !innerView.hasFocus())) {
         dom.classList.remove("ProseMirror-selectednode");
         setContent(editor);
         close();
       }
     },
-    destroy: function() {
+    destroy: function () {
       if (innerView) {
         close();
       }
     },
-    stopEvent: function(event) {
+    stopEvent: function (event) {
       return Boolean(innerView && innerView.dom.contains(event.target));
     },
-    ignoreMutation: function() {
+    ignoreMutation: function () {
       return true;
     },
     dom,

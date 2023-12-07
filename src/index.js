@@ -1,6 +1,6 @@
 import { Node, mergeAttributes } from "@tiptap/core";
 import { FootnoteView } from "./nodeView";
-import SmallCaps from "./extension-smallcaps";
+import FontVariant from "./tiptap-extension-font-variant";
 import { uid } from "uid";
 
 const footnoteNode = Node.create({
@@ -40,4 +40,4 @@ const footnoteNode = Node.create({
 
 export default footnoteNode;
 
-export { SmallCaps };
+export { FontVariant };

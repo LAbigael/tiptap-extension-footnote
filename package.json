@@ -26,5 +26,8 @@
     "@tiptap/pm": "^2.1.13",
     "@tiptap/starter-kit": "^2.1.13",
     "uid": "^2.0.2"
+  },
+  "dependencies": {
+    "@tiptap/extension-text-style": "^2.1.13"
   }
 }
