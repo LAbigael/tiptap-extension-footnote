@@ -20,7 +20,7 @@ const config = {
       sourcemap: true,
     },
   ],
-  external: ["@tiptap/core", "@tiptap/pm/history","@tiptap/pm/transform","@tiptap/pm/state","@tiptap/pm/history","@tiptap/pm/keymap","@tiptap/pm/view", "@tiptap/starter-kit", "uid"],
+  external: ["@tiptap/core", "@tiptap/pm", "@tiptap/starter-kit", "uid", "@tiptap/extension-text-style"],
   plugins: [
     sourcemaps(),
     babel(),

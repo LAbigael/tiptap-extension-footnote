@@ -4,6 +4,11 @@ import { Extension } from "@tiptap/core";
 
 const FontVariant = Extension.create({
   name: "font-variant",
+    addOptions() {
+    return {
+      types: ['textStyle'],
+    }
+  },
   addGlobalAttributes() {
     return [
       {

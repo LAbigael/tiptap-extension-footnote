@@ -1,6 +1,6 @@
 {
   "name": "tiptap-extension-footnote",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "A footnote extension for tiptap",
   "files": [
     "dist"
@@ -25,9 +25,7 @@
     "@tiptap/core": "^2.1.13",
     "@tiptap/pm": "^2.1.13",
     "@tiptap/starter-kit": "^2.1.13",
-    "uid": "^2.0.2"
-  },
-  "dependencies": {
+    "uid": "^2.0.2",
     "@tiptap/extension-text-style": "^2.1.13"
   }
 }
