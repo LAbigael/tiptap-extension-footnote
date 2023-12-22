@@ -2,6 +2,7 @@ import { Node, mergeAttributes } from "@tiptap/core";
 import { FootnoteView } from "./nodeView";
 import FontVariant from "./tiptap-extension-font-variant";
 import { uid } from "uid";
+console.log("loaded");
 
 const footnoteNode = Node.create({
   name: "footnote",

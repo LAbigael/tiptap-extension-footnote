@@ -3,7 +3,7 @@ import "@tiptap/extension-text-style";
 import { Extension } from "@tiptap/core";
 
 const FontVariant = Extension.create({
-  name: "font-variant",
+  name: "fontVariant",
     addOptions() {
     return {
       types: ['textStyle'],
